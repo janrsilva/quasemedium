@@ -1,3 +1,40 @@
+## Esse projeto é um desafio para uma vaga de Fullstack Developer
+
+Objetivo proposto foi criar um clone do [Medium](https://medium.com) com três funcionalidades:
+- Autenticacão
+  - Cadastro ou alteração de informações do usuário
+  - Login
+- Artigos
+  - Cadastro
+  - Leitura
+- Interação
+  - Comentários nos artigos
+
+###### se sobrar tempo
+
+- Exibir qualquer artigo do Medium dentro da plataforma
+
+##### Escolhas de tecnologia
+
+Entende-se que um projeto de leitura de artigos deve ser indexado pelo Google, portanto, sabe-se que a renderização das telas deve ser feita no servidor, pensando nisso, a tecnologia escolhida para construir esse projeto foi o [Next.js](https://nextjs.com)
+
+# run
+
+Como rodar esse projeto?
+
+- se você prefere usar docker
+```bash
+$ docker-compose up # use a opção -d para liberar o terminal
+```
+
+- se você tem o Node 10+ instalado
+```bash
+$ npm run dev
+```
+
+
+# abaixo, documentaçã do próprio Next.js
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
