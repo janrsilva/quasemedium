@@ -10,10 +10,16 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "formik": "^2.2.5",
+    "mongodb": "^3.6.3",
     "next": "10.0.1",
+    "next-auth": "^3.1.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-icons": "^3.11.0",
     "react-modal": "^3.11.2"
+  },
+  "devDependencies": {
+    "@types/next-auth": "^3.1.15",
+    "typescript": "^4.0.5"
   }
 }

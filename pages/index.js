@@ -2,11 +2,12 @@ import Footer from '../components/footer'
 import Header from '../components/header'
 import styles from '../styles/Home.module.css'
 import SignUp from '../components/signup'
+import { providers } from 'next-auth/client'
 
-export default function Home() {
+export default function Home({ providers }) {
   return (
     <div className={styles.container}>
-      <Header />
+      <Header providers={providers} />
       <main className={styles.main}>
         <h1 className={styles.title}>
           Quase leia artigos de forma fácil.
@@ -22,4 +23,13 @@ export default function Home() {
       <Footer />
     </div>
   );
+}
+
+// enable the SSR
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      providers: await providers(context)
+    }
+  }
 }

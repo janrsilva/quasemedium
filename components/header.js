@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from '../styles/Header.module.css'
 import LoginButton from "./login";
 
-export default function Header() {
+export default function Header(props) {
   return (
     <header className={styles.header}>
       <Head>
@@ -16,7 +16,7 @@ export default function Header() {
         width={300}
         height={64}
       />
-      <LoginButton />
+      <LoginButton providers={props.providers} />
     </header>
   )
 }
