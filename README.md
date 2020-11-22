@@ -1,14 +1,14 @@
 ## Esse projeto é um desafio para uma vaga de Fullstack Developer
 
 Objetivo proposto foi criar um clone do [Medium](https://medium.com) com três funcionalidades:
-- Autenticacão
-  - Cadastro ou alteração de informações do usuário
-  - Login
-- Artigos
-  - Cadastro
-  - Leitura
-- Interação
-  - Comentários nos artigos
+- [x] Autenticacão
+  - [x] Cadastro ou alteração de informações do usuário
+  - [x] Login
+- [ ] Artigos
+  - [ ] Cadastro
+  - [ ] Leitura
+- [ ] Interação
+  - [ ] Comentários nos artigos
 
 ###### se sobrar tempo
 

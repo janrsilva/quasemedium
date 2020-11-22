@@ -1,0 +1,14 @@
+
+.grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 3rem;
+}
+
+.grid > div {
+  margin: 0.5rem;
+  text-align: center;
+}
+
