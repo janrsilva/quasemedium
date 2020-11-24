@@ -1,4 +1,4 @@
-import { Db, MongoClient } from 'mongodb';
+import { Db, FilterQuery, MongoClient, ObjectId } from 'mongodb';
 import { IDBConnection } from '../interfaces/db-connection-interface';
 import { DBRepository, Params } from '../interfaces/db-repository';
 
@@ -17,7 +17,17 @@ export class MongoDBAdapter implements DBRepository, IDBConnection {
         const database = process.env.MONGO_DATABASE || 'quasemedium';
         try {
             if (!this.mongoClient) {
-                this.mongoClient = await MongoClient.connect(`mongodb://${host}:${port}/${database}`, { useNewUrlParser: true })
+                this.mongoClient = await MongoClient.connect(
+                    `mongodb://${host}:${port}/${database}`,
+                    {
+                        useNewUrlParser: true,
+                        useUnifiedTopology: true
+                    }
+                ).catch(
+                    (e) => {
+                        throw e;
+                    }
+                )
             }
         } catch (error) {
             console.log('error during connecting to mongo: ');
@@ -74,7 +84,7 @@ export class MongoDBAdapter implements DBRepository, IDBConnection {
 
     list<T>(params: Params): Promise<T[]> {
         // tslint:disable-next-line: no-shadowed-variable
-        let query = {} as mongodb.FilterQuery<any>;
+        let query = {} as FilterQuery<any>;
         Object.keys(params).forEach((key) => {
             query = {...query, ...this.queryBy(key, params[key])};
         });
@@ -101,11 +111,11 @@ export class MongoDBAdapter implements DBRepository, IDBConnection {
         return result.ops[0];
     }
 
-    queryOne(_id: string): mongodb.FilterQuery<any> {
-        return {_id: new mongodb.ObjectId(_id)} as mongodb.FilterQuery<any>;
+    queryOne(_id: string): FilterQuery<any> {
+        return {_id: new ObjectId(_id)} as FilterQuery<any>;
     }
 
-    queryBy(key: string, value: any): mongodb.FilterQuery<any> {
-        return {[key]: value} as mongodb.FilterQuery<any>;
+    queryBy(key: string, value: any): FilterQuery<any> {
+        return {[key]: value} as FilterQuery<any>;
     }
 }

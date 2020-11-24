@@ -16,11 +16,14 @@
     "formik": "^2.2.5",
     "mongodb": "^3.6.3",
     "next": "10.0.1",
+    "next-absolute-url": "^1.2.2",
     "next-auth": "^3.1.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-icons": "^3.11.0",
     "react-modal": "^3.11.2",
+    "rich-markdown-editor": "^11.0.7",
+    "styled-components": "^5.2.1",
     "swr": "^0.3.9"
   },
   "devDependencies": {
@@ -36,5 +39,8 @@
     "react-test-renderer": "^17.0.1",
     "regenerator-runtime": "^0.13.7",
     "typescript": "^4.0.5"
+  },
+  "peerOptionalDependencies": {
+    "mongodb": "^3.6.3"
   }
 }

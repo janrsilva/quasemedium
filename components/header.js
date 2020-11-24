@@ -16,7 +16,7 @@ export default function Header(props) {
   return (
     <header className={styles.header}>
       <Head>
-          <title>Create Next App</title>
+          <title>Quasemedium</title>
           <link rel="icon" href="/favicon.ico" />
       </Head>
       <Image

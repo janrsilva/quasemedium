@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { VscAccount } from 'react-icons/vsc';
+import { BsFileEarmarkPlus } from 'react-icons/bs';
 import { useRouter } from 'next/router'
 import { signOut } from 'next-auth/client'
 import { Fade } from '@material-ui/core';
@@ -11,7 +12,7 @@ export default function AccountMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const router = useRouter();
 
-  const handleClick = (event) => {
+  const menuHandleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -23,10 +24,23 @@ export default function AccountMenu(props) {
     router.push('/account');
   };
 
+  const goNewArticle = () => {
+    router.push('/editor/new');
+  };
+
+  const style = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+
   return (
-    <div>
-      {props.name && <small>Oi, {props.name.split(' ')[0]}</small>}
-      <Button aria-controls="menu-list-grow" aria-haspopup="true" onClick={handleClick}>
+    <div className="menu" style={style}>
+      <span>{props.name && <small>Oi, {props.name.split(' ')[0]}</small>}</span>
+      <Button className="new" aria-controls="menu-list-grow" aria-haspopup="true" onClick={goNewArticle}>
+        <BsFileEarmarkPlus size="1.5rem" />
+      </Button>
+      <Button aria-controls="menu-list-grow" aria-haspopup="true" onClick={menuHandleClick}>
         <VscAccount size="1.5rem" />
       </Button>
       <Menu
@@ -38,6 +52,7 @@ export default function AccountMenu(props) {
         TransitionComponent={Fade}>
         <MenuItem onClick={goAccount}>Minha Conta</MenuItem>
         <MenuItem onClick={handleClose}>Meus Artigos</MenuItem>
+        <MenuItem onClick={goNewArticle}>Novo Artigo</MenuItem>
         <MenuItem onClick={signOut}>Sair</MenuItem>
       </Menu>
     </div>

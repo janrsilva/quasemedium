@@ -3,19 +3,20 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { User } from "../interfaces/user";
 import { AccountService } from "../services/account-service";
 import { AccountRepository } from "../repositories/account-repository";
-import { DBRepository } from "../interfaces/db-repository";
 
 export class AccountController extends BaseController {
     private service: AccountService;
 
     constructor(
-        db: DBRepository,
         protected req: NextApiRequest,
         protected res: NextApiResponse<User>
     ) {
         super(req, res);
+    }
+
+    init() {
         this.service = new AccountService(
-            new AccountRepository(db)
+            new AccountRepository(this.db)
         )
     }
 

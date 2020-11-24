@@ -1,13 +1,31 @@
 import React from 'react';
 import Footer from '../components/footer'
 import Header from '../components/header'
-import styles from '../styles/Home.module.css'
 
 export default function Page(props) {
+  const containerStyle = {
+    minHeight: '100vh',
+    padding: '0',
+    margin: '0',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  };
+  const mainStyle = {
+    flex: '1',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+  containerStyle.justifyContent = props.justifyContent || containerStyle.justifyContent;
+  mainStyle.justifyContent = props.justifyContent || mainStyle.justifyContent;
+
   return (
-    <div className={styles.container}>
+    <div style={containerStyle}>
       <Header/>
-        <main className={styles.main}>
+        <main style={mainStyle}>
           {props.children}
         </main>
       <Footer />
