@@ -58,5 +58,12 @@ $ npm i
 $ npm run dev
 ```
 
+# testes
+
+Para visualizar testes de DOM e regra de negócio
+```bash
+$ npm run test
+```
+
 ---
 A documentação do próprio Next.js pode ser [vista aqui](https://nextjs.org/docs)
