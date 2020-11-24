@@ -36,7 +36,7 @@ export default function AccountMenu(props) {
 
   return (
     <div className="menu" style={style}>
-      <span>{props.name && <small>Oi, {props.name.split(' ')[0]}</small>}</span>
+      <span>{props.name && <small>Oi, <FirtName>{props.name}</FirtName></small>}</span>
       <Button className="new" aria-controls="menu-list-grow" aria-haspopup="true" onClick={goNewArticle}>
         <BsFileEarmarkPlus size="1.5rem" />
       </Button>
@@ -57,4 +57,12 @@ export default function AccountMenu(props) {
       </Menu>
     </div>
   );
+}
+
+export function FirtName(props) {
+  return <>{firtName(props.children)}</>
+}
+
+export function firtName(name) {
+  return name.split(' ')[0]
 }

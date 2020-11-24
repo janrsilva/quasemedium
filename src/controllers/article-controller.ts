@@ -35,7 +35,7 @@ export class ArticleController extends BaseController {
             return this.res.status(403);
         }
         const article = await this.service.create(this.req.body)
-        return this.res.status(200).json(await this.service.get(article._id))
+        return this.res.status(201).json(await this.service.get(article._id))
     }
 
     async patch() {

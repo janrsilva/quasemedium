@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import axios from 'axios';
 import Page from '../../components/page'
 import { RiSave3Fill } from 'react-icons/ri';
@@ -69,7 +69,6 @@ export default function MyEditor() {
   }
 
   const onSave = async () => {
-    console.log(state);
 
     const article = {
       text: state.text,
@@ -85,7 +84,6 @@ export default function MyEditor() {
   }
 
   const onPublish = async () => {
-    console.log('publicado')
     const {data} = await axios.put(`/api/articles/${articleId}/published`, {});
   }
 

@@ -14,6 +14,7 @@
     "@types/react": "^17.0.0",
     "axios": "^0.21.0",
     "formik": "^2.2.5",
+    "moment": "^2.29.1",
     "mongodb": "^3.6.3",
     "next": "10.0.1",
     "next-absolute-url": "^1.2.2",

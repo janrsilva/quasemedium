@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Page from '../../components/page'
 import Editor from "rich-markdown-editor";
 import { DBFactory } from "../../src/factories/db-factory";
@@ -6,16 +6,15 @@ import { ArticleRepository } from "../../src/repositories/article-repository";
 import { ArticleService } from "../../src/services/article-service";
 import { GetServerSideProps } from "next";
 import { CSSProperties } from "@material-ui/core/styles/withStyles";
-import { Avatar, Button, Typography } from "@material-ui/core";
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Divider from '@material-ui/core/Divider';
-import { GoThumbsdown, GoThumbsup } from 'react-icons/go';
+import { getSession } from "next-auth/client";
+import Comments from '../../components/comments'
+import * as moment from 'moment';
+import 'moment/locale/pt-br';
+moment.locale('pt-br');
 
-export default function ReadArticle({article}) {
+export default function ReadArticle({user, article}) {
   article.text = unescape(article.text);
+  const [comments, setComments] = useState(article.comments || []);
 
   const style = {
     display: 'flex',
@@ -31,6 +30,10 @@ export default function ReadArticle({article}) {
     fontSize: '1.5em',
   } as CSSProperties;
 
+  const onComment = (comment) => {
+    setComments([comment, ...comments]);
+  }
+
   return (
     <Page justifyContent="flex-start">
       <div style={style}>
@@ -42,24 +45,7 @@ export default function ReadArticle({article}) {
         </div>
         <hr/>
         <div style={styleItem}>
-          <Comments items={[
-            {
-              name: 'Ada',
-              text: 'Excelente! Me ajudou muito!!!!'
-            },
-            {
-              name: 'Grace',
-              text: 'Acho que falta pimenta.'
-            },
-            {
-              name: 'Turing',
-              text: 'Estou ansioso para ler o próximo!'
-            },
-            {
-              name: 'Bill',
-              text: 'Vou copiar! hahahahhahahhaahha'
-            }
-          ]}/>
+          <Comments onCreate={onComment} articleId={article._id} user={user} items={comments || sampleComments}/>
         </div>
       </div>
     </Page>
@@ -67,7 +53,7 @@ export default function ReadArticle({article}) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({req, params}) => {
-
+  const {user} = await getSession({req});
   const name = params.name as string;
 
   const db = DBFactory.build(process.env.DB_DRIVER);
@@ -79,50 +65,35 @@ export const getServerSideProps: GetServerSideProps = async ({req, params}) => {
   article.text = escape(article.text);
   return {
     props: {
+      user,
       article: JSON.parse(JSON.stringify(article))
     },
   }
 }
 
-function Comments(props) {
-  const style = {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100$',
-    margin: '0 auto',
-  } as CSSProperties;
-
-  return <div style={style}>
-    {props.items.map(
-      (item) => <Comment item={item}/>
-    )}
-  </div>
-}
-
-function Comment(props) {
-  const avatar = {
-    float: 'right',
-    margin: '10px',
-  } as CSSProperties;
-
-  return (
-    <List>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar style={avatar} src={'https://i.pravatar.cc/300?u=' + Date.now()} />
-        </ListItemAvatar>
-        <ListItemText primary={props.item.name} secondary="Jan 9, 2014" />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem>
-        <Typography variant="body1" gutterBottom>
-          {props.item.text}
-        </Typography>
-      </ListItem>
-      <div style={{display: "flex", justifyContent: "flex-end"}}>
-        <Button color="primary"><GoThumbsup/></Button>
-        <Button color="primary"><GoThumbsdown/></Button>
-      </div>
-    </List>
-  );
-}
+export const sampleComments = [
+  {
+    user: {
+      name: 'Ada'
+    },
+    text: 'Excelente! Me ajudou muito!!!!'
+  },
+  {
+    user: {
+      name: 'Grace'
+    },
+    text: 'Acho que falta pimenta.'
+  },
+  {
+    user: {
+      name: 'Turing'
+    },
+    text: 'Estou ansioso para ler o próximo!'
+  },
+  {
+    user: {
+      name: 'Bill'
+    },
+    text: 'Vou copiar! hahahahhahahhaahha'
+  }
+];
