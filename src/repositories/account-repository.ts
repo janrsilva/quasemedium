@@ -22,7 +22,7 @@ export class AccountRepository {
     }
 
     update(_id: string, user: User): Promise<User> {
-        return this.db.update<User>(_id, User);
+        return this.db.update<User>(_id, user);
     }
 
     delete(_id: string): Promise<boolean>  {

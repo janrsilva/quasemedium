@@ -39,6 +39,7 @@ export default function ReadArticle({user, article}) {
       <div style={style}>
         <div style={styleItem}>
           <Editor
+            onChange={()=>{}}
             readOnly={true}
             dark={false}
             defaultValue={article.text}/>
