@@ -79,7 +79,7 @@ export default function MyEditor() {
       const {data} = await axios.patch(`/api/articles/${articleId}`, article);
     } else {
       const {data} = await axios.post('/api/articles', article);
-      router.push(`/editor/${data._id}`);
+      router.push(`/article/${data.name}`);
     }
   }
 
