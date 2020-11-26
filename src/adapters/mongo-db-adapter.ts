@@ -15,10 +15,11 @@ export class MongoDBAdapter implements DBRepository, IDBConnection {
         const host = process.env.MONGO_HOST || 'localhost';
         const port = process.env.MONGO_PORT || '27017';
         const database = process.env.MONGO_DATABASE || 'quasemedium';
+        const url = process.env.MONGO_URL || process.env.DATABASE_URL || `mongodb://${host}:${port}/${database}`;
         try {
             if (!this.mongoClient) {
                 this.mongoClient = await MongoClient.connect(
-                    `mongodb://${host}:${port}/${database}`,
+                    url,
                     {
                         useNewUrlParser: true,
                         useUnifiedTopology: true
